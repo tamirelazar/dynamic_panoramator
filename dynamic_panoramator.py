@@ -1,7 +1,3 @@
-# Initial code for ex4.
-# You may change this code, but keep the functions' signatures
-# You can also split the code to multiple files as long as this file's API is unchanged
-
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -14,7 +10,7 @@ from scipy.ndimage import label, center_of_mass, map_coordinates
 import shutil
 from imageio import imwrite
 
-import sol4_utils
+import utils
 
 
 def harris_corner_detector(im):
