@@ -1,5 +1,5 @@
 # dynamic_panoramator
-Course assignment for IMPR course at HUJI.
+Assignment for IMPR course at HUJI.
 Given a video with consistent vertical movement, creates a static perspective-changing panoramic video.
 
 ### Details
