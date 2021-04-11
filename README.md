@@ -16,4 +16,5 @@ It is extremely cool.
 
 Just run make_panorama.py to see my example of the program's function.
 If you want to try your own, put a video in the video directory and run the file the same way.
+
 **Side Note:** This won't work with any video. You have to hold your camera in a consistent height, move it rather slowly and stick to lateral movement. To get best results, shoot a subject in the horizon - this program does not handle rotation amazingly.
