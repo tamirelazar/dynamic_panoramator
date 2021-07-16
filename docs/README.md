@@ -1,5 +1,3 @@
-## Dynamic Panoramator
-
 ### Turns This:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Vwe2E89m5x0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -7,6 +5,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sPMCly6xqLI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
+It is extremely cool.
 
 # Details
 
@@ -14,8 +13,6 @@ The program deconstructs the video into frames, and then:
 - Identifies features for each frame.
 - Calculate the alignment matrix between each frame and the next.
 - Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
-
-It is extremely cool.
 
 ## Usage
 
