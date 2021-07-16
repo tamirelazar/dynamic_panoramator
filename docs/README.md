@@ -9,9 +9,9 @@
 # Details
 
 The program deconstructs the video into frames, and then:
-1. Identifies features for each frame.
-2. Calculate the alignment matrix between each frame and the next.
-3. Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
+- Identifies features for each frame.
+- Calculate the alignment matrix between each frame and the next.
+- Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
 
 It is extremely cool.
 
