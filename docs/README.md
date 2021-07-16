@@ -1,12 +1,12 @@
-## Dynamic Panoramator
+# Dynamic Panoramator
 
-### Turns This:
+## Turns This:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Vwe2E89m5x0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-### Into This:
+## Into This:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sPMCly6xqLI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Details
+# Details
 
 The program deconstructs the video into frames, and then:
 1. Identifies features for each frame.
@@ -15,7 +15,7 @@ The program deconstructs the video into frames, and then:
 
 It is extremely cool.
 
-### Usage
+## Usage
 
 Just run make_panorama.py to see my example of the program's function.
 If you want to try your own, put a video in the video directory and run the file the same way.
