@@ -1,5 +1,9 @@
-# dynamic_panoramator
-Assignment for IMPR course at HUJI.
+# Panoramic Stereo Mosaicing
+Implementation of Shmuel Peleg's work on stereo mosaicing from video, e.g. in the article cited below:
+
+Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch "Stereo mosaicing from a single moving video camera", Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII, (22 June 2001); https://doi.org/10.1117/12.430806
+
+## Description
 Given a video with consistent vertical movement, creates a static perspective-changing panoramic video.
 
 ### Details
@@ -8,9 +12,6 @@ The program deconstructs the video into frames, and then:
 1. Identifies features for each frame.
 2. Calculate the alignment matrix between each frame and the next.
 3. Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
-
-It is extremely cool.
-
 
 ### Usage
 
