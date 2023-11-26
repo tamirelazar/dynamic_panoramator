@@ -3,9 +3,6 @@ Implementation of Shmuel Peleg's work on stereo mosaicing from video, e.g. in th
 
 Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch "Stereo mosaicing from a single moving video camera", Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII, (22 June 2001); https://doi.org/10.1117/12.430806
 
-## Description
-Given a video with consistent vertical movement, creates a static perspective-changing panoramic video.
-
 ## Demonstration
 
 ### Original Video:
