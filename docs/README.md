@@ -1,27 +1,49 @@
 # Panoramic Stereo Mosaicing
-Implementation of Shmuel Peleg's work on stereo mosaicing from video, e.g. in the article cited below:
 
-Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch "Stereo mosaicing from a single moving video camera", Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII, (22 June 2001); https://doi.org/10.1117/12.430806
+A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). [Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves. …]
 
-## Demonstration
+> Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch. "Stereo mosaicing from a single moving video camera." *Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII* (2001). https://doi.org/10.1117/12.430806
 
-### Original Video:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Vwe2E89m5x0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## The result
 
-### After Mosaicing:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sPMCly6xqLI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video src="demo.mp4" autoplay loop muted playsinline width="720"></video>
 
+![Mosaiced result](demo.gif)
 
-## Details
+*[caption — what the viewer is looking at, and what to notice as it loops …]*
 
-The program deconstructs the video into frames, and then:
-1. Identifies features for each frame.
-2. Calculate the alignment matrix between each frame and the next.
-3. Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
+## From input to result
 
-### Usage
+The full source clip and the mosaiced output:
 
-Just run make_panorama.py to see my example of the program's function.
-If you want to try your own, put a video in the video directory and run the file the same way.
+### Original video
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Vwe2E89m5x0" title="Original video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**Side Note:** This won't work with any video. You have to hold your camera in a consistent height, move it rather slowly and stick to lateral movement. To get best results, shoot a subject in the horizon - this program does not handle rotation amazingly.
+### After mosaicing
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sPMCly6xqLI" title="After mosaicing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## How it works
+
+The pipeline deconstructs the video into frames, then:
+
+1. Detects Harris corner features in each frame and builds descriptors.
+2. Matches features between consecutive frames and estimates the alignment (homography, translation-only by default) with RANSAC.
+3. Assembles new panoramic frames from strips of many aligned source frames — turning lateral camera motion into a synthetic change of viewpoint across the output.
+
+## Reproduce
+
+Requires Python 3.12 and `ffmpeg` on PATH.
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # or: uv venv --python 3.12 .venv
+pip install -r requirements.txt
+python make_panorama.py
+```
+
+This runs the bundled example (`videos/agripas.mp4`) and writes the mosaic video to the repository root. To try your own clip, drop a video in `videos/` and point `make_panorama.py` at it.
+
+## Limitations
+
+The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon. [It does not handle rotation well … — honest note. …]
+
+Code and full details: [github.com/tamirelazar/dynamic_panoramator](https://github.com/tamirelazar/dynamic_panoramator)
