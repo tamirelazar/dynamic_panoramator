@@ -3,7 +3,7 @@ import dynamic_panoramator
 import time
 
 def main():
-  experiments = ['agripas.mp4']
+  experiments = ['boat.mp4']
 
   for experiment in experiments:
     exp_no_ext = experiment.split('.')[0]

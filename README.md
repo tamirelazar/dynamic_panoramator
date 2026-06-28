@@ -6,7 +6,7 @@ A faithful replication of stereo mosaicing from a single moving video camera, af
 
 ![Mosaiced result](docs/demo.gif)
 
-
+<sub>Demo generated from the "boat" example sequence from the Hebrew University Image Processing course.</sub>
 
 ## What this is
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 python make_panorama.py
 ```
 
-This runs the bundled example (`videos/agripas.mp4`) and writes the mosaic video to the repository root.
+This runs the bundled example (`videos/boat.mp4`) and writes the mosaic video to the repository root.
 
 To try your own clip, drop a video in `videos/` and point `make_panorama.py` at it.
 
