@@ -1,21 +1,50 @@
 # Panoramic Stereo Mosaicing
-Implementation of Shmuel Peleg's work on stereo mosaicing from video, e.g. in the article cited below:
 
-Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch "Stereo mosaicing from a single moving video camera", Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII, (22 June 2001); https://doi.org/10.1117/12.430806
+A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). [Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves. …]
 
-## Description
-Given a video with consistent vertical movement, creates a static perspective-changing panoramic video.
+<!-- Hero demo: MP4 with GIF fallback. GitHub renders the <video>; the GIF shows anywhere HTML video is stripped. -->
+<video src="docs/demo.mp4" autoplay loop muted playsinline width="960"></video>
 
-### Details
+![Mosaiced result](docs/demo.gif)
 
-The program deconstructs the video into frames, and then:
-1. Identifies features for each frame.
-2. Calculate the alignment matrix between each frame and the next.
-3. Create new, panoramic frames from batches of matching frames, thus transforming a video showing lateral movement of camera, into a panoramic video showing perspective change of the same view.
+*[caption — what the viewer is looking at …]*
 
-### Usage
+## What this is
 
-Just run make_panorama.py to see my example of the program's function.
-If you want to try your own, put a video in the video directory and run the file the same way.
+[One short paragraph: this is a from-scratch replication of the paper's method, written for coursework, kept faithful to the original rather than modernized. …]
 
-**Side Note:** This won't work with any video. You have to hold your camera in a consistent height, move it rather slowly and stick to lateral movement. To get best results, shoot a subject in the horizon - this program does not handle rotation amazingly.
+> Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch. "Stereo mosaicing from a single moving video camera." *Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII* (2001). https://doi.org/10.1117/12.430806
+
+## How it works
+
+The pipeline deconstructs the video into frames, then:
+
+1. Detects Harris corner features in each frame and builds descriptors.
+2. Matches features between consecutive frames and estimates the alignment (homography, translation-only by default) with RANSAC.
+3. Assembles new panoramic frames from strips of many aligned source frames — turning lateral camera motion into a synthetic change of viewpoint across the output.
+
+## Reproduce
+
+Requires Python 3.12 and `ffmpeg` on PATH.
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # or: uv venv --python 3.12 .venv
+pip install -r requirements.txt
+python make_panorama.py
+```
+
+This runs the bundled example (`videos/agripas.mp4`) and writes the mosaic video to the repository root.
+
+To try your own clip, drop a video in `videos/` and point `make_panorama.py` at it.
+
+## Limitations
+
+The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon. [It does not handle rotation well … — honest note. …]
+
+## Improved version
+
+[link to the fork once it exists — "an extended version with more examples lives at →" …]
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).
