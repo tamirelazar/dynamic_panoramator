@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import time
 
 
-from scipy.ndimage.morphology import generate_binary_structure
-from scipy.ndimage.filters import maximum_filter, convolve
+from scipy.ndimage import generate_binary_structure
+from scipy.ndimage import maximum_filter, convolve
 from scipy.ndimage import label, center_of_mass, map_coordinates
 import shutil
 from imageio import imwrite
