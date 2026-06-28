@@ -1,6 +1,6 @@
 # Panoramic Stereo Mosaicing
 
-A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). [Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves. …]
+A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves.
 
 > Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch. "Stereo mosaicing from a single moving video camera." *Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII* (2001). https://doi.org/10.1117/12.430806
 
@@ -10,7 +10,9 @@ A faithful replication of stereo mosaicing from a single moving video camera, af
 
 ![Mosaiced result](demo.gif)
 
-*[caption — what the viewer is looking at, and what to notice as it loops …]*
+## What this is
+
+this is a from-scratch replication of the paper's method, written for coursework.
 
 ## From input to result
 
@@ -44,6 +46,10 @@ This runs the bundled example (`videos/agripas.mp4`) and writes the mosaic video
 
 ## Limitations
 
-The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon. [It does not handle rotation well … — honest note. …]
+The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon.
+
+## Improved version
+
+[TBA]
 
 Code and full details: [github.com/tamirelazar/dynamic_panoramator](https://github.com/tamirelazar/dynamic_panoramator)

@@ -1,17 +1,16 @@
 # Panoramic Stereo Mosaicing
 
-A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). [Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves. …]
-
+A faithful replication of stereo mosaicing from a single moving video camera, after Peleg, Ben-Ezra & Pritch (2001). Given a video panned steadily across a scene, it reconstructs a panorama whose perspective shifts as the viewpoint moves.
 <!-- Hero demo: MP4 with GIF fallback. GitHub renders the <video>; the GIF shows anywhere HTML video is stripped. -->
 <video src="docs/demo.mp4" autoplay loop muted playsinline width="960"></video>
 
 ![Mosaiced result](docs/demo.gif)
 
-*[caption — what the viewer is looking at …]*
+
 
 ## What this is
 
-[One short paragraph: this is a from-scratch replication of the paper's method, written for coursework, kept faithful to the original rather than modernized. …]
+this is a from-scratch replication of the paper's method, written for coursework.
 
 > Shmuel Peleg, Michael Ben-Ezra, and Yael Pritch. "Stereo mosaicing from a single moving video camera." *Proc. SPIE 4297, Stereoscopic Displays and Virtual Reality Systems VIII* (2001). https://doi.org/10.1117/12.430806
 
@@ -39,11 +38,11 @@ To try your own clip, drop a video in `videos/` and point `make_panorama.py` at 
 
 ## Limitations
 
-The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon. [It does not handle rotation well … — honest note. …]
+The method assumes a specific capture: steady camera height, slow lateral pan, no rotation, subject near the horizon. 
 
 ## Improved version
 
-[link to the fork once it exists — "an extended version with more examples lives at →" …]
+[TBA]
 
 ## License
 
