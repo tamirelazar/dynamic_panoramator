@@ -1,0 +1,6 @@
+.venv/
+dump/
+tmp_folder_for_panoramic_frames/
+agripas.mp4
+__pycache__/
+*.pyc

@@ -1,6 +1,6 @@
 from scipy.signal import convolve2d
 import numpy as np
-from scipy.ndimage.filters import convolve
+from scipy.ndimage import convolve
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 

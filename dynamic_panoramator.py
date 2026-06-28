@@ -10,7 +10,7 @@ from scipy.ndimage import label, center_of_mass, map_coordinates
 import shutil
 from imageio import imwrite
 
-import utils
+import utils as sol4_utils
 
 
 def harris_corner_detector(im):
@@ -299,7 +299,7 @@ def compute_bounding_box(homography, w, h):
     maxy = max(transformed[:, 1])
 
     #  return 2x2 mat of max and min of x,y each
-    return np.array([[minx, miny], [maxx, maxy]]).astype(np.int)
+    return np.array([[minx, miny], [maxx, maxy]]).astype(int)
 
 
 def warp_channel(image, homography):
@@ -311,7 +311,7 @@ def warp_channel(image, homography):
     """
     #  back-warp the image to middle frame coords. full calculations in page 11
     h, w = image.shape
-    min_coord, max_coord = compute_bounding_box(homography, w, h).astype(np.int)
+    min_coord, max_coord = compute_bounding_box(homography, w, h).astype(int)
     y = np.linspace(min_coord[1], max_coord[1], max_coord[1] - min_coord[1])
     x = np.linspace(min_coord[0], max_coord[0], max_coord[0] - min_coord[0])
     coords = np.meshgrid(x, y)
@@ -346,7 +346,7 @@ def filter_homographies_with_translation(homographies, minimum_right_translation
         if homographies[i][0, -1] - last > minimum_right_translation:
             translation_over_thresh.append(i)
             last = homographies[i][0, -1]
-    return np.array(translation_over_thresh).astype(np.int)
+    return np.array(translation_over_thresh).astype(int)
 
 
 def estimate_rigid_transform(points1, points2, translation_only=False):
@@ -395,8 +395,8 @@ def non_maximum_suppression(image):
     # Erode areas to single points.
     lbs, num = label(local_max)
     centers = center_of_mass(local_max, lbs, np.arange(num) + 1)
-    centers = np.stack(centers).round().astype(np.int)
-    ret = np.zeros_like(image, dtype=np.bool)
+    centers = np.stack(centers).round().astype(int)
+    ret = np.zeros_like(image, dtype=bool)
     ret[centers[:, 0], centers[:, 1]] = True
 
     return ret
@@ -411,9 +411,9 @@ def spread_out_corners(im, m, n, radius):
   :param radius: Minimal distance of corner points from the boundary of the image.
   :return: An array with shape (N,2), where ret[i,:] are the [x,y] coordinates of the ith corner points.
   """
-    corners = [np.empty((0, 2), dtype=np.int)]
-    x_bound = np.linspace(0, im.shape[1], n + 1, dtype=np.int)
-    y_bound = np.linspace(0, im.shape[0], m + 1, dtype=np.int)
+    corners = [np.empty((0, 2), dtype=int)]
+    x_bound = np.linspace(0, im.shape[1], n + 1, dtype=int)
+    y_bound = np.linspace(0, im.shape[0], m + 1, dtype=int)
     for i in range(n):
         for j in range(m):
             # Use Harris detector on every sub image.
@@ -503,7 +503,7 @@ class PanoramicVideoGenerator:
         global_offset = np.min(self.bounding_boxes, axis=(0, 1))
         self.bounding_boxes -= global_offset
 
-        slice_centers = np.linspace(0, self.w, number_of_panoramas + 2, endpoint=True, dtype=np.int)[1:-1]
+        slice_centers = np.linspace(0, self.w, number_of_panoramas + 2, endpoint=True, dtype=int)[1:-1]
         warped_slice_centers = np.zeros((number_of_panoramas, self.frames_for_panoramas.size))
         # every slice is a different panorama, it indicates the slices of the input images from which the panorama
         # will be concatenated
@@ -514,21 +514,21 @@ class PanoramicVideoGenerator:
             # we are actually only interested in the x coordinate of each slice center in the panoramas' coordinate system
             warped_slice_centers[i] = np.array(warped_centers)[:, :, 0].squeeze() - global_offset[0]
 
-        panorama_size = np.max(self.bounding_boxes, axis=(0, 1)).astype(np.int) + 1
+        panorama_size = np.max(self.bounding_boxes, axis=(0, 1)).astype(int) + 1
 
         # boundary between input images in the panorama
         x_strip_boundary = ((warped_slice_centers[:, :-1] + warped_slice_centers[:, 1:]) / 2)
         x_strip_boundary = np.hstack([np.zeros((number_of_panoramas, 1)),
                                       x_strip_boundary,
                                       np.ones((number_of_panoramas, 1)) * panorama_size[0]])
-        x_strip_boundary = x_strip_boundary.round().astype(np.int)
+        x_strip_boundary = x_strip_boundary.round().astype(int)
 
         self.panoramas = np.zeros((number_of_panoramas, panorama_size[1], panorama_size[0], 3), dtype=np.float64)
         for i, frame_index in enumerate(self.frames_for_panoramas):
             # warp every input image once, and populate all panoramas
             image = sol4_utils.read_image(self.files[frame_index], 2)
             warped_image = warp_image(image, self.homographies[i])
-            x_offset, y_offset = self.bounding_boxes[i][0].astype(np.int)
+            x_offset, y_offset = self.bounding_boxes[i][0].astype(int)
             y_bottom = y_offset + warped_image.shape[0]
 
             for panorama_index in range(number_of_panoramas):
@@ -557,7 +557,7 @@ class PanoramicVideoGenerator:
         os.makedirs(out_folder)
         # save individual panorama images to 'tmp_folder_for_panoramic_frames'
         for i, panorama in enumerate(self.panoramas):
-            imwrite('%s/panorama%02d.png' % (out_folder, i + 1), panorama)
+            imwrite('%s/panorama%02d.png' % (out_folder, i + 1), (panorama.clip(0, 1) * 255).astype('uint8'))
         if os.path.exists('%s.mp4' % self.file_prefix):
             os.remove('%s.mp4' % self.file_prefix)
         # write output video to current folder
