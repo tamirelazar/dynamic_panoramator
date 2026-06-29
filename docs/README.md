@@ -52,6 +52,9 @@ The method assumes a specific capture: steady camera height, slow lateral pan, n
 
 ## Improved version
 
-[TBA]
+[stereo-mosaic-live](https://github.com/tamirelazar/stereo-mosaic-live) takes the same
+method past replication: viewpoint-selectable output (pushbroom / X-slit / forward-motion via
+the Crossed-Slits projection), graceful handling of casual handheld footage, and a CLI — with
+an interactive in-browser viewer in progress.
 
 Code and full details: [github.com/tamirelazar/dynamic_panoramator](https://github.com/tamirelazar/dynamic_panoramator)
